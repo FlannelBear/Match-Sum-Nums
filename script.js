@@ -6,10 +6,12 @@
   return n;
 }*/
 
+const r = 25;
+
 function makeArray(){
   console.log( 'In makeArray');
   let newArray = [];
-  for( let i = 0; i < 5; i++){ // pushes 5 random values between 0 and 9 (inclusive) into the new array
+  for( let i = 0; i < r; i++){ // pushes r random values between 0 and 9 (inclusive) into the new array
     let n = Math.floor(Math.random() * 10);
     newArray.push(n);
   } // end for loop
@@ -22,11 +24,13 @@ function makeArray(){
 // Create a function that will determine if a pair of numbers that matches the given sum exists.  If they do, return those values.
 
 function matchSumNums(sum){
+  // Generate and show random array
   console.log('In matchSumNums');
   let workingArray = makeArray();
   console.log('Working Array:', workingArray);
 
-  for( let i = 1; i < workingArray.length; i++ ){
+  // First attempt: Issue is that this only compares numbers to their immediate neighbors and ignores possibility of match being more than one index position away.
+  /*for( let i = 1; i < workingArray.length; i++ ){
     // check if pair is equal to given sum.
     if( (workingArray[i] + workingArray[i-1]) == sum ){
       console.log(true);
@@ -35,6 +39,23 @@ function matchSumNums(sum){
     } else {
       console.log(false);
       return "No number pairs equal the given sum.";
+    } // end if/else statement
+  } // end for loop */
+
+  // Second attempt: After watching the video further and getting past the part where they explain the 'Linear' solution that works inwards, I've paused and want to try it myself.
+
+  let x = workingArray.length - 1; // x will represent the highend of the shrinking range
+
+  for( let i = 0; i < x; i++ ){
+    if( (workingArray[i] + workingArray[x]) == sum ){
+      console.log(true);
+      let answer = [workingArray[i], workingArray[x]];
+      return answer;
+    } else if( (workingArray[i] + workingArray[x]) > sum ){
+      x--; // reduces the value of x for the next iteration.
+      i--; // shifts i back so that it stays in place for the next iteration.
+    } else if( (workingArray[i] + workingArray[x]) < sum ){
+      continue; // allows for loop to continue and increment i.
     }
   }
-}
+} // end matchSumNums
