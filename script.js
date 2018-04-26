@@ -23,11 +23,13 @@ function makeArray(){
 
 // Create a function that will determine if a pair of numbers that matches the given sum exists.  If they do, return those values.
 
-function matchSumNums(sum){
+let testArray = [0, 1, 5, 2, 8, 9, 4, 7];
+
+function matchSumNums(sum, arr){
   // Generate and show random array
-  console.log('In matchSumNums');
+  /*console.log('In matchSumNums');
   let workingArray = makeArray();
-  console.log('Working Array:', workingArray);
+  console.log('Working Array:', workingArray);*/
 
   // First attempt: Issue is that this only compares numbers to their immediate neighbors and ignores possibility of match being more than one index position away.
   /*for( let i = 1; i < workingArray.length; i++ ){
@@ -44,16 +46,20 @@ function matchSumNums(sum){
 
   // Second attempt: After watching the video further and getting past the part where they explain the 'Linear' solution that works inwards, I've paused and want to try it myself.
 
-  let x = workingArray.length - 1; // x will represent the highend of the shrinking range
+  arr.sort(function(a, b){return a - b});
+  console.log(testArray);
+
+  //let x = workingArray.length - 1; // x will represent the highend of the shrinking range
+  let x = arr.length - 1;
   let answerArray = [];
   for( let i = 0; i < x; i++ ){
-    if( (workingArray[i] + workingArray[x]) == sum ){
-      let answer = [workingArray[i], workingArray[x]];
+    if( (arr[i] + arr[x]) == sum ){
+      let answer = [arr[i], arr[x]];
       answerArray.push(answer);
-    } else if( (workingArray[i] + workingArray[x]) > sum ){
+    } else if( (arr[i] + arr[x]) > sum ){
       x--; // reduces the value of x for the next iteration.
       i--; // shifts i back so that it stays in place for the next iteration.
-    } else if( (workingArray[i] + workingArray[x]) < sum ){
+    } else if( (arr[i] + arr[x]) < sum ){
       continue; // allows for loop to continue and increment i.
     }
   } // end for loop
