@@ -67,5 +67,5 @@ function matchSumNums(sum, arr){
       return answerArray;
     } else {
       return false;
-    }
+    } // tests if any pairs existed and returns those that do.
 } // end matchSumNums
