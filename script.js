@@ -45,17 +45,21 @@ function matchSumNums(sum){
   // Second attempt: After watching the video further and getting past the part where they explain the 'Linear' solution that works inwards, I've paused and want to try it myself.
 
   let x = workingArray.length - 1; // x will represent the highend of the shrinking range
-
+  let answerArray = [];
   for( let i = 0; i < x; i++ ){
     if( (workingArray[i] + workingArray[x]) == sum ){
-      console.log(true);
       let answer = [workingArray[i], workingArray[x]];
-      return answer;
+      answerArray.push(answer);
     } else if( (workingArray[i] + workingArray[x]) > sum ){
       x--; // reduces the value of x for the next iteration.
       i--; // shifts i back so that it stays in place for the next iteration.
     } else if( (workingArray[i] + workingArray[x]) < sum ){
       continue; // allows for loop to continue and increment i.
     }
-  }
+  } // end for loop
+    if( answerArray.length > 0 ){
+      return answerArray;
+    } else {
+      return false;
+    }
 } // end matchSumNums
